@@ -1,0 +1,9 @@
+FROM ubuntu:18.04
+
+RUN apt update && apt install golang-go -y
+FROM golang:1.18.4-alpine
+RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+WORKDIR /project
+
+COPY subs.txt .
