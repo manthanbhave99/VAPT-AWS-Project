@@ -1,0 +1,15 @@
+IAM Roles
+
+> Select Lambda
+
+1. AWSLambdaExecute
+2. AmazonEC2ReadOnlyAccess
+3. AmazonSSMFullAccess
+ 
+> Select EC2
+
+1. AmazonSSMManagedInstanceCore
+
+Need to add couple of more policies manually...
+1. AWSLambdaBasicExecutionPolicy
+2. InvokeOtherLambdaPolicy
