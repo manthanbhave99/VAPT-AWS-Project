@@ -1,0 +1,11 @@
+Tools installed with Docker image
+subfinder 
+httpx 
+nuclei
+
+Services by AWS
+EC2
+Lambda
+IAN
+S3
+Step Function
