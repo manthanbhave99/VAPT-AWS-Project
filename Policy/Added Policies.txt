@@ -10,6 +10,12 @@ IAM Roles
 
 1. AmazonSSMManagedInstanceCore
 
+> Select type of trusted entity
+> Select Step Functions
+
+1. StepFunctionsLambdaRole 
+
+
 Need to add couple of more policies manually...
 1. AWSLambdaBasicExecutionPolicy
 2. InvokeOtherLambdaPolicy
