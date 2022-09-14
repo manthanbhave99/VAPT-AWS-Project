@@ -17,3 +17,10 @@ httpx :- go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 
 nuclei :- go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+
+# AWS Services
+EC2
+Lambda
+S3
+IAM
+Step Functions
