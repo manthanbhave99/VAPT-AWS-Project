@@ -2,34 +2,21 @@ import json
 import boto3
 import time
 
-client = boto3.client('lambda')
 
 def lambda_handler(event, context):
-
-	response = client.invoke(
-		FunctionName='subfinder',
-		InvocationType='RequestResponse',
-		)
-
-	responseJson = json.load(response['Payload'])["subs"]
-	subdomains = responseJson.split("\\n")
-
-	for sd in subdomains:
-		sub = sd.strip("\"")
-		httpx_test(sub)
-
-
-def httpx_test(subdomain):
 
     # boto3 client
     client = boto3.client("ec2")
     ssm = boto3.client("ssm")
+    s3 = boto3.client("s3")
+    
+    bucket = "vapt-s3"
 
     # getting instance information
     describeInstance = client.describe_instances()
 
     InstanceId = []
-    # fetching instance id of the running instances
+    # fetchin instance id of the running instances
     for i in describeInstance["Reservations"]:
         for instance in i["Instances"]:
             if instance["State"]["Name"] == "running":
@@ -42,17 +29,21 @@ def httpx_test(subdomain):
             InstanceIds=[instanceid],
             DocumentName="AWS-RunShellScript",
             Parameters={
-                "commands": ["echo " + subdomain + " | httpx -t 5"]
+                "commands": ["cat /home/kali/manthan/project/subs.txt | httpx -silent | aws s3 cp - s3://vapt-s3/web.txt ; aws s3 cp s3://vapt-s3/web.txt /home/kali/manthan/project/web.txt ; cat /home/kali/manthan/project/web.txt "]
             },
         )
 
         # fetching command id for the output
         command_id = response["Command"]["CommandId"]
 
-        time.sleep(4)
+        time.sleep(30)
 
         # fetching command output
         output = ssm.get_command_invocation(CommandId=command_id, InstanceId=instanceid)
-        print()
+        print(output)
+#   see the difference...
+    filename = 'testweb' + '.txt'
+    uploadByteStream = bytes(json.dumps(output['StandardOutputContent']).encode('UTF-8'))
+    s3.put_object(Bucket=bucket, Key=filename, Body=uploadByteStream)
 
-    return {"statusCode": 200, "httpx": json.dumps(output["StandardOutputContent"])}
+    return {"statusCode": 200, "body": json.dumps(output["StandardOutputContent"])}
