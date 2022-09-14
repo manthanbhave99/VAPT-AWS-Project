@@ -8,6 +8,9 @@ def lambda_handler(event, context):
     # boto3 client
     client = boto3.client("ec2")
     ssm = boto3.client("ssm")
+    s3 = boto3.client("s3")
+    
+    bucket = 'vapt-s3'
 
     # getting instance information
     describeInstance = client.describe_instances()
@@ -26,8 +29,7 @@ def lambda_handler(event, context):
             InstanceIds=[instanceid],
             DocumentName="AWS-RunShellScript",
             Parameters={
-                "commands": ["sudo docker run vapt-subfinder subfinder -d vulnweb.com"]
-#                "commands": ["pwd"]
+                "commands": ["sudo docker run vapt-subfinder subfinder -d cdac.in -silent | aws s3 cp - s3://vapt-s3/subs.txt ; aws s3 cp s3://vapt-s3/subs.txt /home/ubuntu/mannthan/project/subs.txt ; cat /home/ubuntu/manthan/project/subs.txt"]
             },
         )
 
@@ -39,7 +41,9 @@ def lambda_handler(event, context):
         # fetching command output
         output = ssm.get_command_invocation(CommandId=command_id, InstanceId=instanceid)
         print(output)
-#        test = {}
-#        test["StandardOutputContent"] = "testphp.vulnweb.com\ntesthtml.vulnweb.com\nvulnweb.com"
+   # just showing difference
+    filename = 'testsubs' + '.txt'
+    uploadByteStream = bytes(json.dumps(output["StandardOutputContent"]).encode('UTF-8'))
+    s3.put_object(Bucket=bucket, Key=filename, Body=uploadByteStream)
 
     return {"statusCode": 200, "subs": json.dumps(output["StandardOutputContent"])}
