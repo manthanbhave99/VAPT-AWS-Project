@@ -9,6 +9,14 @@
 		<div class="head">
 			<h1 align="center" class="h">Welcome to PMVSS World</h1>
 			<h2 align="center" class="h">We have a Solution..!!</h2>
+			
+			<form action="welcome.php" method="post">
+				Name: <input type="text" name="name"><br>
+				<input type="submit">
+			</form>
+			<?php
+				Welcome <?php echo $_POST["name"]; 
+			?> 
 			<h4 align="center" class="h">Domain Name</h2><input type="text" name="Domain" placeholder="Type a Domain" class="h">
 			<button class="link" onclick="">Scan Now..--></button>
 		</div>
