@@ -10,15 +10,13 @@
 			<h1 align="center" class="h">Welcome to PMVSS World</h1>
 			<h2 align="center" class="h">We have a Solution..!!</h2>
 			
-			<form action="welcome.php" method="post">
-				Name: <input type="text" name="name"><br>
-				<input type="submit">
+			<form action="index.php" method="post">
+				<h4 align="center" class="h">Domain Name</h2><input type="text" name="domain" placeholder="Type a Domain">
+				<input type="submit" value="Submit">Scan Now..--></input>
 			</form>
-			<?php
-				Welcome <?php echo $_POST["name"]; 
-			?> 
-			<h4 align="center" class="h">Domain Name</h2><input type="text" name="Domain" placeholder="Type a Domain" class="h">
-			<button class="link" onclick="">Scan Now..--></button>
+
+				 <?php echo $_POST["domain"]; ?> goes to scanning process 
+			
 		</div>
 	</div>
 
