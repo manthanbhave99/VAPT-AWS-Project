@@ -5,6 +5,8 @@ IAM Roles
 1. AWSLambdaExecute
 2. AmazonEC2ReadOnlyAccess
 3. AmazonSSMFullAccess
+4. AmazonS3FullAccess
+5. AWSLambdaBasicExecutionRole
  
 > Select EC2
 
