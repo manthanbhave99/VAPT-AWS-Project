@@ -9,11 +9,12 @@ IAM Roles
 > Select EC2
 
 1. AmazonSSMManagedInstanceCore
+2. AmazonS3FullAccess
 
 > Select type of trusted entity
 > Select Step Functions
 #AWS managed
-1. AmazonS3FullAccess :- 	Provides full access to all buckets via the AWS Management Console.
+1. AmazonS3FullAccess :-	Provides full access to all buckets via the AWS Management Console.
 	
 2. AWSLambdaBasicExecutionRole :-	Provides write permissions to CloudWatch Logs.
 	
