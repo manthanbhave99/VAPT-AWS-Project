@@ -12,8 +12,12 @@ IAM Roles
 
 > Select type of trusted entity
 > Select Step Functions
-
-1. StepFunctionsLambdaRole 
+#AWS managed
+1. AmazonS3FullAccess :- 	Provides full access to all buckets via the AWS Management Console.
+	
+2. AWSLambdaBasicExecutionRole :-	Provides write permissions to CloudWatch Logs.
+	
+3. AWSLambdaRole :-	Default policy for AWS Lambda service role.
 
 
 Need to add couple of more policies manually...
