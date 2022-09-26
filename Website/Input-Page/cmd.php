@@ -10,5 +10,16 @@ $cmd = 'curl -X POST -d \'{"input": "{\"subdomain\": \"'.$subdomain.'\", \"domai
 
 $output = shell_exec($cmd);
 
+
+if ($scantype == "lite" && $networkscan == "no") {
+        sleep(150);                   
+} elseif ($scantype == "intensive" && $networkscan == "no") {
+        sleep(300); 
+} else {
+        sleep(210);
+}
+                                             
+header('Location: http://52.90.86.38/vapt/output.html');
+
 echo "<pre>$output</pre>";
 ?>
