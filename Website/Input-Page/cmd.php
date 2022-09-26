@@ -19,7 +19,7 @@ if ($scantype == "lite" && $networkscan == "no") {
         sleep(210);
 }
                                              
-header('Location: http://52.90.86.38/vapt/output.html');
+header('Location: http://52.90.86.38/manthan/output.html');
 
 echo "<pre>$output</pre>";
 ?>
