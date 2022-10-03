@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     ssm = boto3.client("ssm")
     s3 = boto3.client("s3")
     
-    bucket = "vapt-s3"
+    bucket = "vapt-aws-s3"
 
     # getting instance information
     describeInstance = client.describe_instances()
@@ -29,7 +29,7 @@ def lambda_handler(event, context):
             InstanceIds=[instanceid],
             DocumentName="AWS-RunShellScript",
             Parameters={
-                "commands": ["cd /home/ubuntu/manthan/project ; cat web.txt | nuclei -t /home/ubuntu/manthan/nuclei-templates/cves/ -silent | aws s3 cp - s3://vapt-s3/vulns.txt ; aws s3 cp s3://vapt-s3/vulns.txt /home/ubuntu/manthan/project/vulns.txt ; cat /home/ubuntu/manthan/project/vulns.txt "]
+                "commands": ["cat /home/ubuntu/manthan/project/web.txt | nuclei -t /home/ubuntu/manthan/nuclei-templates/cves/ -silent | aws s3 cp - s3://vapt-aws-s3/vulns.txt ; aws s3 cp s3://vapt-aws-s3/vulns.txt /home/ubuntu/manthan/project/vulns.txt ; cat /home/ubuntu/manthan/project/vulns.txt "]
             },
         )
 
