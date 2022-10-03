@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     ssm = boto3.client("ssm")
     s3 = boto3.client("s3")
     
-    bucket = 'vapt-s3'
+    bucket = 'vapt-aws-s3'
 
     # getting instance information
     describeInstance = client.describe_instances()
@@ -29,7 +29,7 @@ def lambda_handler(event, context):
             InstanceIds=[instanceid],
             DocumentName="AWS-RunShellScript",
             Parameters={
-                "commands": ["sudo docker run vapt-subfinder subfinder -d cdac.in -silent | aws s3 cp - s3://vapt-s3/subs.txt ; aws s3 cp s3://vapt-s3/subs.txt /home/ubuntu/mannthan/project/subs.txt ; cat /home/ubuntu/manthan/project/subs.txt"]
+                "commands": ["sudo docker run vapt-subfinder subfinder -d cdac.in -silent | aws s3 cp - s3://vapt-aws-s3/subs.txt ; aws s3 cp s3://vapt-aws-s3/subs.txt /home/ubuntu/manthan/project/subs.txt ; cat /home/ubuntu/manthan/project/subs.txt"]
             },
         )
 
