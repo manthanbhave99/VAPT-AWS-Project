@@ -26,7 +26,7 @@ def lambda_handler(event, context):
             InstanceIds=[instanceid],
             DocumentName="AWS-RunShellScript",
             Parameters={
-                "commands": ["aws s3 cp s3://vapt-s3/vulns.txt /var/www/html/vulns"]
+                "commands": ["aws s3 cp s3://vapt-aws-s3/vulns.txt /var/www/html/vulns"]
             },
         )
 
